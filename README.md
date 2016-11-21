@@ -1250,7 +1250,17 @@ js操作获取和设置cookie
 `HTTP/2`提供更多的加密支持
 `HTTP/2`使用多路技术，允许多个消息在一个连接上同时交差。 
 它增加了头压缩（header compression），因此即使非常小的请求，其请求和响应的`header`都只会占用很小比例的带宽。
-  
+
+###Cookie被禁用了？Session还能用吗？为什么？
+不一定。如果`session id`保存在cookie中，则禁用cookie后session将无法正常使用。
+
+原因如下：当程序需要为某个客户端的请求创建一个session时，服务器首先检查这个客户端的请求里是否已包含了一个session标识（称为`session id`），如果已包含则说明以前已经为此客户端创建过session，服务器就按照`session id`把这个session检索出来使用（检索不到，会新建一个），如果客户端请求不包含`session id`，则为此客户端创建一个session并且生成一个与此session相关联的`session id`，
+>`session id`的值应该是一个既不会重复，又不容易被找到规律以仿造的字符串，这个`session id`将被在本次响应中返回给客户端保存。
+
+**保存这个`session id`最常见的方法就是直接放在cookie中**，这样在交互过程中浏览器可以自动的按照规则把这个标识发送给服务器。但是，一旦浏览器禁用了cookie，session同时也会无法使用。解决方法有两种：
+1. 使用URL重写，将`session id`附在URL中
+2. 使用隐藏表单字段,将`session id`放在隐藏的表单字段中一同提交
+
   [1]: /img/bVldFY
   [2]: http://segmentfault.com/blog/trigkit4/1190000000718840
   [3]: http://segmentfault.com/blog/trigkit4/1190000000660786#articleHeader15
