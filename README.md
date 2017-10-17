@@ -56,7 +56,6 @@
   - [说说最近最流行的一些东西吧？常去哪些网站？](#%E8%AF%B4%E8%AF%B4%E6%9C%80%E8%BF%91%E6%9C%80%E6%B5%81%E8%A1%8C%E7%9A%84%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E5%90%A7%EF%BC%9F%E5%B8%B8%E5%8E%BB%E5%93%AA%E4%BA%9B%E7%BD%91%E7%AB%99%EF%BC%9F)
   - [javascript对象的几种创建方式](#javascript%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%87%A0%E7%A7%8D%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F)
   - [javascript继承的6种方法](#javascript%E7%BB%A7%E6%89%BF%E7%9A%846%E7%A7%8D%E6%96%B9%E6%B3%95)
-  - [详情：[JavaScript继承方式详解][9]](#%E8%AF%A6%E6%83%85%EF%BC%9Ajavascript%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F%E8%AF%A6%E8%A7%A39)
   - [异步加载和延迟加载](#%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD)
   - [前端安全问题？](#%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%EF%BC%9F)
     - [sql注入原理](#sql%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86)
@@ -807,10 +806,10 @@ javascript继承的6种方法
     5，寄生式继承
     6，寄生组合式继承
 
-详情：[JavaScript继承方式详解][9]
-ajax过程
-------
+> 详情：[JavaScript继承方式详解][9]
 
+ajax过程
+-----
     (1)创建XMLHttpRequest对象,也就是创建一个异步调用对象.
     
     (2)创建一个新的HTTP请求,并指定该HTTP请求的方法、URL及验证信息.
