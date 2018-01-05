@@ -1,4 +1,106 @@
-##说说你对闭包的理解
+## 目录
+  - [说说你对闭包的理解](#%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9%E9%97%AD%E5%8C%85%E7%9A%84%E7%90%86%E8%A7%A3)
+  - [请你谈谈Cookie的弊端](#%E8%AF%B7%E4%BD%A0%E8%B0%88%E8%B0%88cookie%E7%9A%84%E5%BC%8A%E7%AB%AF)
+    - [优点：极高的扩展性和可用性](#%E4%BC%98%E7%82%B9%EF%BC%9A%E6%9E%81%E9%AB%98%E7%9A%84%E6%89%A9%E5%B1%95%E6%80%A7%E5%92%8C%E5%8F%AF%E7%94%A8%E6%80%A7)
+    - [缺点：](#%E7%BC%BA%E7%82%B9%EF%BC%9A)
+  - [浏览器本地存储](#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8)
+    - [web storage和cookie的区别](#web-storage%E5%92%8Ccookie%E7%9A%84%E5%8C%BA%E5%88%AB)
+    - [cookie 和session 的区别：](#cookie-%E5%92%8Csession-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9A)
+  - [CSS 相关问题](#css-%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98)
+    - [display:none和visibility:hidden的区别？](#displaynone%E5%92%8Cvisibilityhidden%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F)
+    - [CSS中 link 和@import 的区别是？](#css%E4%B8%AD-link-%E5%92%8Cimport-%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%EF%BC%9F)
+    - [position:absolute和float属性的异同](#positionabsolute%E5%92%8Cfloat%E5%B1%9E%E6%80%A7%E7%9A%84%E5%BC%82%E5%90%8C)
+    - [介绍一下box-sizing属性？](#%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8Bbox-sizing%E5%B1%9E%E6%80%A7%EF%BC%9F)
+    - [CSS 选择符有哪些？哪些属性可以继承？优先级算法如何计算？ CSS3新增伪类有那些？](#css-%E9%80%89%E6%8B%A9%E7%AC%A6%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E5%93%AA%E4%BA%9B%E5%B1%9E%E6%80%A7%E5%8F%AF%E4%BB%A5%E7%BB%A7%E6%89%BF%EF%BC%9F%E4%BC%98%E5%85%88%E7%BA%A7%E7%AE%97%E6%B3%95%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%EF%BC%9F-css3%E6%96%B0%E5%A2%9E%E4%BC%AA%E7%B1%BB%E6%9C%89%E9%82%A3%E4%BA%9B%EF%BC%9F)
+    - [position的值， relative和absolute分别是相对于谁进行定位的？](#position%E7%9A%84%E5%80%BC%EF%BC%8C-relative%E5%92%8Cabsolute%E5%88%86%E5%88%AB%E6%98%AF%E7%9B%B8%E5%AF%B9%E4%BA%8E%E8%B0%81%E8%BF%9B%E8%A1%8C%E5%AE%9A%E4%BD%8D%E7%9A%84%EF%BC%9F)
+    - [CSS3有哪些新特性？](#css3%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9F)
+    - [XML和JSON的区别？](#xml%E5%92%8Cjson%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F)
+    - [对BFC规范的理解？](#%E5%AF%B9bfc%E8%A7%84%E8%8C%83%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F)
+    - [解释下 CSS sprites，以及你要如何在页面或网站中使用它。](#%E8%A7%A3%E9%87%8A%E4%B8%8B-css-sprites%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%BD%A0%E8%A6%81%E5%A6%82%E4%BD%95%E5%9C%A8%E9%A1%B5%E9%9D%A2%E6%88%96%E7%BD%91%E7%AB%99%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%AE%83%E3%80%82)
+  - [html部分](#html%E9%83%A8%E5%88%86)
+    - [说说你对语义化的理解？](#%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9%E8%AF%AD%E4%B9%89%E5%8C%96%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F)
+    - [Doctype作用? 严格模式与混杂模式如何区分？它们有何意义?](#doctype%E4%BD%9C%E7%94%A8-%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F%E4%B8%8E%E6%B7%B7%E6%9D%82%E6%A8%A1%E5%BC%8F%E5%A6%82%E4%BD%95%E5%8C%BA%E5%88%86%EF%BC%9F%E5%AE%83%E4%BB%AC%E6%9C%89%E4%BD%95%E6%84%8F%E4%B9%89)
+    - [你知道多少种Doctype文档类型？](#%E4%BD%A0%E7%9F%A5%E9%81%93%E5%A4%9A%E5%B0%91%E7%A7%8Ddoctype%E6%96%87%E6%A1%A3%E7%B1%BB%E5%9E%8B%EF%BC%9F)
+  - [HTML与XHTML——二者有什么区别](#html%E4%B8%8Exhtml%E2%80%94%E2%80%94%E4%BA%8C%E8%80%85%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB)
+  - [常见兼容性问题？](#%E5%B8%B8%E8%A7%81%E5%85%BC%E5%AE%B9%E6%80%A7%E9%97%AE%E9%A2%98%EF%BC%9F)
+    - [解释下浮动和它的工作原理？清除浮动的技巧](#%E8%A7%A3%E9%87%8A%E4%B8%8B%E6%B5%AE%E5%8A%A8%E5%92%8C%E5%AE%83%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%9F%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8%E7%9A%84%E6%8A%80%E5%B7%A7)
+    - [浮动元素引起的问题和解决办法？](#%E6%B5%AE%E5%8A%A8%E5%85%83%E7%B4%A0%E5%BC%95%E8%B5%B7%E7%9A%84%E9%97%AE%E9%A2%98%E5%92%8C%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%EF%BC%9F)
+    - [IE 8以下版本的浏览器中的盒模型有什么不同](#ie-8%E4%BB%A5%E4%B8%8B%E7%89%88%E6%9C%AC%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E7%9A%84%E7%9B%92%E6%A8%A1%E5%9E%8B%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C)
+    - [DOM操作——怎样添加、移除、移动、复制、创建和查找节点。](#dom%E6%93%8D%E4%BD%9C%E2%80%94%E2%80%94%E6%80%8E%E6%A0%B7%E6%B7%BB%E5%8A%A0%E3%80%81%E7%A7%BB%E9%99%A4%E3%80%81%E7%A7%BB%E5%8A%A8%E3%80%81%E5%A4%8D%E5%88%B6%E3%80%81%E5%88%9B%E5%BB%BA%E5%92%8C%E6%9F%A5%E6%89%BE%E8%8A%82%E7%82%B9%E3%80%82)
+    - [html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？](#html5%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7%E3%80%81%E7%A7%BB%E9%99%A4%E4%BA%86%E9%82%A3%E4%BA%9B%E5%85%83%E7%B4%A0%EF%BC%9F%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86html5%E6%96%B0%E6%A0%87%E7%AD%BE%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98%EF%BC%9F%E5%A6%82%E4%BD%95%E5%8C%BA%E5%88%86-html-%E5%92%8C-html5%EF%BC%9F)
+  - [iframe的优缺点？](#iframe%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9%EF%BC%9F)
+  - [如何实现浏览器内多个标签页之间的通信?](#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E5%A4%9A%E4%B8%AA%E6%A0%87%E7%AD%BE%E9%A1%B5%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1)
+  - [线程与进程的区别](#%E7%BA%BF%E7%A8%8B%E4%B8%8E%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB)
+  - [你如何对网站的文件和资源进行优化？](#%E4%BD%A0%E5%A6%82%E4%BD%95%E5%AF%B9%E7%BD%91%E7%AB%99%E7%9A%84%E6%96%87%E4%BB%B6%E5%92%8C%E8%B5%84%E6%BA%90%E8%BF%9B%E8%A1%8C%E4%BC%98%E5%8C%96%EF%BC%9F)
+  - [请说出三种减少页面加载时间的方法。](#%E8%AF%B7%E8%AF%B4%E5%87%BA%E4%B8%89%E7%A7%8D%E5%87%8F%E5%B0%91%E9%A1%B5%E9%9D%A2%E5%8A%A0%E8%BD%BD%E6%97%B6%E9%97%B4%E7%9A%84%E6%96%B9%E6%B3%95%E3%80%82)
+  - [你都使用哪些工具来测试代码的性能？](#%E4%BD%A0%E9%83%BD%E4%BD%BF%E7%94%A8%E5%93%AA%E4%BA%9B%E5%B7%A5%E5%85%B7%E6%9D%A5%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81%E7%9A%84%E6%80%A7%E8%83%BD%EF%BC%9F)
+  - [什么是 FOUC（无样式内容闪烁）？你如何来避免 FOUC？](#%E4%BB%80%E4%B9%88%E6%98%AF-fouc%EF%BC%88%E6%97%A0%E6%A0%B7%E5%BC%8F%E5%86%85%E5%AE%B9%E9%97%AA%E7%83%81%EF%BC%89%EF%BC%9F%E4%BD%A0%E5%A6%82%E4%BD%95%E6%9D%A5%E9%81%BF%E5%85%8D-fouc%EF%BC%9F)
+  - [null和undefined的区别？](#null%E5%92%8Cundefined%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F)
+  - [new操作符具体干了什么呢?](#new%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%85%B7%E4%BD%93%E5%B9%B2%E4%BA%86%E4%BB%80%E4%B9%88%E5%91%A2)
+  - [js延迟加载的方式有哪些？](#js%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F)
+  - [如何解决跨域问题?](#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98)
+  - [documen.write和 innerHTML的区别](#documenwrite%E5%92%8C-innerhtml%E7%9A%84%E5%8C%BA%E5%88%AB)
+  - [.call() 和 .apply() 的区别和作用？](#call-%E5%92%8C-apply-%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E4%BD%9C%E7%94%A8%EF%BC%9F)
+  - [哪些操作会造成内存泄漏？](#%E5%93%AA%E4%BA%9B%E6%93%8D%E4%BD%9C%E4%BC%9A%E9%80%A0%E6%88%90%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%EF%BC%9F)
+  - [JavaScript中的作用域与变量声明提升？](#javascript%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E%E6%8F%90%E5%8D%87%EF%BC%9F)
+  - [如何判断当前脚本运行在浏览器还是node环境中？](#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E8%84%9A%E6%9C%AC%E8%BF%90%E8%A1%8C%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%98%E6%98%AFnode%E7%8E%AF%E5%A2%83%E4%B8%AD%EF%BC%9F)
+  - [其他问题？](#%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98%EF%BC%9F)
+    - [你遇到过比较难的技术问题是？你是如何解决的？](#%E4%BD%A0%E9%81%87%E5%88%B0%E8%BF%87%E6%AF%94%E8%BE%83%E9%9A%BE%E7%9A%84%E6%8A%80%E6%9C%AF%E9%97%AE%E9%A2%98%E6%98%AF%EF%BC%9F%E4%BD%A0%E6%98%AF%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E7%9A%84%EF%BC%9F)
+    - [列举IE 与其他浏览器不一样的特性？](#%E5%88%97%E4%B8%BEie-%E4%B8%8E%E5%85%B6%E4%BB%96%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%8D%E4%B8%80%E6%A0%B7%E7%9A%84%E7%89%B9%E6%80%A7%EF%BC%9F)
+    - [什么叫优雅降级和渐进增强？](#%E4%BB%80%E4%B9%88%E5%8F%AB%E4%BC%98%E9%9B%85%E9%99%8D%E7%BA%A7%E5%92%8C%E6%B8%90%E8%BF%9B%E5%A2%9E%E5%BC%BA%EF%BC%9F)
+    - [WEB应用从服务器主动推送Data到客户端有那些方式？](#web%E5%BA%94%E7%94%A8%E4%BB%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%BB%E5%8A%A8%E6%8E%A8%E9%80%81data%E5%88%B0%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%9C%89%E9%82%A3%E4%BA%9B%E6%96%B9%E5%BC%8F%EF%BC%9F)
+    - [对前端界面工程师这个职位是怎么样理解的？它的前景会怎么样？](#%E5%AF%B9%E5%89%8D%E7%AB%AF%E7%95%8C%E9%9D%A2%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%BF%99%E4%B8%AA%E8%81%8C%E4%BD%8D%E6%98%AF%E6%80%8E%E4%B9%88%E6%A0%B7%E7%90%86%E8%A7%A3%E7%9A%84%EF%BC%9F%E5%AE%83%E7%9A%84%E5%89%8D%E6%99%AF%E4%BC%9A%E6%80%8E%E4%B9%88%E6%A0%B7%EF%BC%9F)
+  - [你有哪些性能优化的方法？](#%E4%BD%A0%E6%9C%89%E5%93%AA%E4%BA%9B%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9F)
+  - [一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？](#%E4%B8%80%E4%B8%AA%E9%A1%B5%E9%9D%A2%E4%BB%8E%E8%BE%93%E5%85%A5-url-%E5%88%B0%E9%A1%B5%E9%9D%A2%E5%8A%A0%E8%BD%BD%E6%98%BE%E7%A4%BA%E5%AE%8C%E6%88%90%EF%BC%8C%E8%BF%99%E4%B8%AA%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F)
+  - [平时如何管理你的项目？](#%E5%B9%B3%E6%97%B6%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E4%BD%A0%E7%9A%84%E9%A1%B9%E7%9B%AE%EF%BC%9F)
+  - [说说最近最流行的一些东西吧？常去哪些网站？](#%E8%AF%B4%E8%AF%B4%E6%9C%80%E8%BF%91%E6%9C%80%E6%B5%81%E8%A1%8C%E7%9A%84%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E5%90%A7%EF%BC%9F%E5%B8%B8%E5%8E%BB%E5%93%AA%E4%BA%9B%E7%BD%91%E7%AB%99%EF%BC%9F)
+  - [javascript对象的几种创建方式](#javascript%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%87%A0%E7%A7%8D%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F)
+  - [javascript继承的6种方法](#javascript%E7%BB%A7%E6%89%BF%E7%9A%846%E7%A7%8D%E6%96%B9%E6%B3%95)
+  - [异步加载和延迟加载](#%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD)
+  - [前端安全问题？](#%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%EF%BC%9F)
+    - [sql注入原理](#sql%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86)
+    - [XSS原理及防范](#xss%E5%8E%9F%E7%90%86%E5%8F%8A%E9%98%B2%E8%8C%83)
+    - [XSS防范方法](#xss%E9%98%B2%E8%8C%83%E6%96%B9%E6%B3%95)
+    - [XSS与CSRF有什么区别吗？](#xss%E4%B8%8Ecsrf%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E5%90%97%EF%BC%9F)
+    - [CSRF的防御](#csrf%E7%9A%84%E9%98%B2%E5%BE%A1)
+  - [ie各版本和chrome可以并行下载多少个资源](#ie%E5%90%84%E7%89%88%E6%9C%AC%E5%92%8Cchrome%E5%8F%AF%E4%BB%A5%E5%B9%B6%E8%A1%8C%E4%B8%8B%E8%BD%BD%E5%A4%9A%E5%B0%91%E4%B8%AA%E8%B5%84%E6%BA%90)
+  - [javascript里面的继承怎么实现，如何避免原型链上面的对象共享](#javascript%E9%87%8C%E9%9D%A2%E7%9A%84%E7%BB%A7%E6%89%BF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%EF%BC%8C%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%8E%9F%E5%9E%8B%E9%93%BE%E4%B8%8A%E9%9D%A2%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%85%B1%E4%BA%AB)
+  - [grunt， YUI compressor 和 google clojure用来进行代码压缩的用法。](#grunt%EF%BC%8C-yui-compressor-%E5%92%8C-google-clojure%E7%94%A8%E6%9D%A5%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%8E%8B%E7%BC%A9%E7%9A%84%E7%94%A8%E6%B3%95%E3%80%82)
+  - [Flash、Ajax各自的优缺点，在使用中如何取舍？](#flash%E3%80%81ajax%E5%90%84%E8%87%AA%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9%EF%BC%8C%E5%9C%A8%E4%BD%BF%E7%94%A8%E4%B8%AD%E5%A6%82%E4%BD%95%E5%8F%96%E8%88%8D%EF%BC%9F)
+  - [请解释一下 JavaScript 的同源策略。](#%E8%AF%B7%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8B-javascript-%E7%9A%84%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5%E3%80%82)
+    - [为什么要有同源限制？](#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89%E5%90%8C%E6%BA%90%E9%99%90%E5%88%B6%EF%BC%9F)
+  - [什么是 "use strict"; ? 使用它的好处和坏处分别是什么？](#%E4%BB%80%E4%B9%88%E6%98%AF-use-strict-%E4%BD%BF%E7%94%A8%E5%AE%83%E7%9A%84%E5%A5%BD%E5%A4%84%E5%92%8C%E5%9D%8F%E5%A4%84%E5%88%86%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F)
+  - [GET和POST的区别，何时使用POST？](#get%E5%92%8Cpost%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%8C%E4%BD%95%E6%97%B6%E4%BD%BF%E7%94%A8post%EF%BC%9F)
+  - [哪些地方会出现css阻塞，哪些地方会出现js阻塞？](#%E5%93%AA%E4%BA%9B%E5%9C%B0%E6%96%B9%E4%BC%9A%E5%87%BA%E7%8E%B0css%E9%98%BB%E5%A1%9E%EF%BC%8C%E5%93%AA%E4%BA%9B%E5%9C%B0%E6%96%B9%E4%BC%9A%E5%87%BA%E7%8E%B0js%E9%98%BB%E5%A1%9E%EF%BC%9F)
+    - [Javascript无阻塞加载具体方式](#javascript%E6%97%A0%E9%98%BB%E5%A1%9E%E5%8A%A0%E8%BD%BD%E5%85%B7%E4%BD%93%E6%96%B9%E5%BC%8F)
+  - [闭包相关问题？](#%E9%97%AD%E5%8C%85%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%EF%BC%9F)
+  - [js事件处理程序问题？](#js%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F%E9%97%AE%E9%A2%98%EF%BC%9F)
+  - [eval是做什么的？](#eval%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F)
+  - [JavaScript原型，原型链 ? 有什么特点？](#javascript%E5%8E%9F%E5%9E%8B%EF%BC%8C%E5%8E%9F%E5%9E%8B%E9%93%BE-%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F)
+  - [事件、IE与火狐的事件机制有什么区别？ 如何阻止冒泡？](#%E4%BA%8B%E4%BB%B6%E3%80%81ie%E4%B8%8E%E7%81%AB%E7%8B%90%E7%9A%84%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F-%E5%A6%82%E4%BD%95%E9%98%BB%E6%AD%A2%E5%86%92%E6%B3%A1%EF%BC%9F)
+  - [ajax 是什么?ajax 的交互模型?同步和异步的区别?如何解决跨域问题?](#ajax-%E6%98%AF%E4%BB%80%E4%B9%88ajax-%E7%9A%84%E4%BA%A4%E4%BA%92%E6%A8%A1%E5%9E%8B%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5%E7%9A%84%E5%8C%BA%E5%88%AB%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98)
+  - [js对象的深度克隆](#js%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%85%8B%E9%9A%86)
+  - [AMD和CMD 规范的区别？](#amd%E5%92%8Ccmd-%E8%A7%84%E8%8C%83%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F)
+  - [网站重构的理解？](#%E7%BD%91%E7%AB%99%E9%87%8D%E6%9E%84%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F)
+  - [如何获取UA？](#%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96ua%EF%BC%9F)
+  - [js数组去重](#js%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D)
+  - [HTTP状态码](#http%E7%8A%B6%E6%80%81%E7%A0%81)
+  - [js操作获取和设置cookie](#js%E6%93%8D%E4%BD%9C%E8%8E%B7%E5%8F%96%E5%92%8C%E8%AE%BE%E7%BD%AEcookie)
+    - [说说TCP传输的三次握手策略](#%E8%AF%B4%E8%AF%B4tcp%E4%BC%A0%E8%BE%93%E7%9A%84%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E7%AD%96%E7%95%A5)
+    - [说说你对Promise的理解](#%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9promise%E7%9A%84%E7%90%86%E8%A7%A3)
+    - [标记清除（mark and sweep）](#%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4%EF%BC%88mark-and-sweep%EF%BC%89)
+    - [引用计数(reference counting)](#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0reference-counting)
+    - [谈谈性能优化问题](#%E8%B0%88%E8%B0%88%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98)
+    - [移动端性能优化](#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96)
+    - [Expires和Cache-Control](#expires%E5%92%8Ccache-control)
+    - [栈和队列的区别?](#%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E7%9A%84%E5%8C%BA%E5%88%AB)
+    - [栈和堆的区别？](#%E6%A0%88%E5%92%8C%E5%A0%86%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F)
+    - [关于Http 2.0 你知道多少？](#%E5%85%B3%E4%BA%8Ehttp-20-%E4%BD%A0%E7%9F%A5%E9%81%93%E5%A4%9A%E5%B0%91%EF%BC%9F)
+    - [Cookie被禁用了？Session还能用吗？为什么？](#cookie%E8%A2%AB%E7%A6%81%E7%94%A8%E4%BA%86%EF%BC%9Fsession%E8%BF%98%E8%83%BD%E7%94%A8%E5%90%97%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F)
+
+---
+
+## 说说你对闭包的理解
 
 使用闭包主要是为了设计私有的方法和变量。闭包的优点是可以避免全局变量的污染，缺点是闭包会常驻内存，会增大内存使用量，使用不当很容易造成内存泄露。
 
@@ -27,14 +129,14 @@
 IE 提供了一种存储可以持久化用户数据，叫做`userdata`，从`IE5.0`就开始支持。每个数据最多128K，每个域名下最多1M。这个持久化数据放在缓存中，如果缓存没有清理，那么会一直存在。
 
 
-###优点：极高的扩展性和可用性
+### 优点：极高的扩展性和可用性
 
     1.通过良好的编程，控制保存在cookie中的session对象的大小。
     2.通过加密和安全传输技术（SSL），减少cookie被破解的可能性。
     3.只在cookie中存放不敏感数据，即使被盗也不会有重大损失。
     4.控制cookie的生命期，使之不会永远有效。偷盗者很可能拿到一个过期的cookie。
 
-###缺点：
+### 缺点：
 
     1.`Cookie`数量和长度的限制。每个domain最多只能有20条cookie，每个cookie长度不能超过4KB，否则会被截掉。
     
@@ -52,7 +154,7 @@ IE 提供了一种存储可以持久化用户数据，叫做`userdata`，从`IE5
 
 而`localStorage`用于持久化的本地存储，除非主动删除数据，否则数据是永远不会过期的。
 
-###web storage和cookie的区别
+### web storage和cookie的区别
 
 
 `Web Storage`的概念和`cookie`相似，区别是它是为了更大容量存储设计的。`Cookie`的大小是受限的，并且每次你请求一个新的页面的时候`Cookie`都会被发送过去，这样无形中浪费了带宽，另外`cookie`还需要指定作用域，不可以跨域调用。
@@ -69,7 +171,7 @@ IE 提供了一种存储可以持久化用户数据，叫做`userdata`，从`IE5
 
 
 
-###cookie 和session 的区别：
+### cookie 和session 的区别：
  
      1、cookie数据存放在客户的浏览器上，session数据放在服务器上。
      2、cookie不是很安全，别人可以分析存放在本地的COOKIE并进行COOKIE欺骗
@@ -81,10 +183,11 @@ IE 提供了一种存储可以持久化用户数据，叫做`userdata`，从`IE5
         将登陆信息等重要信息存放为SESSION
         其他信息如果需要保留，可以放在COOKIE中
 
+
 CSS 相关问题
 --------
 
-###display:none和visibility:hidden的区别？
+### display:none和visibility:hidden的区别？
  
 
     display:none  隐藏对应的元素，在文档布局中不再给它分配空间，它各边的元素会合拢，
@@ -92,15 +195,15 @@ CSS 相关问题
     
     visibility:hidden  隐藏对应的元素，但是在文档布局中仍保留原来的空间。
 
-###CSS中 link 和@import 的区别是？
+### CSS中 link 和@import 的区别是？
  
 
     (1) link属于HTML标签，而@import是CSS提供的; 
     (2) 页面被加载的时，link会同时被加载，而@import引用的CSS会等到页面被加载完再加载;
     (3) import只在IE5以上才能识别，而link是HTML标签，无兼容问题; 
     (4) link方式的样式的权重 高于@import的权重.
-    
-###position:absolute和float属性的异同  
+
+### position:absolute和float属性的异同  
     
     A：共同点：
     对内联元素设置`float`和`absolute`属性，可以让元素脱离文档流，并且可以设置其宽高。
@@ -108,7 +211,7 @@ CSS 相关问题
     B：不同点：
     float仍会占据位置，position会覆盖文档流中的其他元素。
 
-###介绍一下box-sizing属性？
+### 介绍一下box-sizing属性？
 
 `box-sizing`属性主要用来控制元素的盒模型的解析模式。默认值是`content-box`。
 
@@ -120,7 +223,7 @@ CSS 相关问题
 标准浏览器下，按照W3C规范对盒模型解析，一旦修改了元素的边框或内距，就会影响元素的盒子尺寸，就不得不重新计算元素的盒子尺寸，从而影响整个页面的布局。    
 
 
-###CSS 选择符有哪些？哪些属性可以继承？优先级算法如何计算？ CSS3新增伪类有那些？
+### CSS 选择符有哪些？哪些属性可以继承？优先级算法如何计算？ CSS3新增伪类有那些？
 
    
     1.id选择器（ # myid）
@@ -140,14 +243,14 @@ CSS 相关问题
   *   优先级就近原则，同权重情况下样式定义最近者为准;
           
   *   载入样式以最后载入的定位为准;
-      
+
 >优先级为:
       
       
     !important >  id > class > tag  
       
     important 比 内联优先级高,但内联比 id 要高
-    
+
 >CSS3新增伪类举例：
        
     p:first-of-type 选择属于其父元素的首个 <p> 元素的每个 <p> 元素。
@@ -157,9 +260,9 @@ CSS 相关问题
     p:nth-child(2)  选择属于其父元素的第二个子元素的每个 <p> 元素。
     :enabled  :disabled 控制表单控件的禁用状态。
     :checked        单选框或复选框被选中。
- 
 
-###position的值， relative和absolute分别是相对于谁进行定位的？
+
+### position的值， relative和absolute分别是相对于谁进行定位的？
 
     absolute 
             生成绝对定位的元素， 相对于最近一级的 定位不是 static 的父元素来进行定位。
@@ -172,7 +275,7 @@ CSS 相关问题
 
     static  默认值。没有定位，元素出现在正常的流中
 
-###CSS3有哪些新特性？
+### CSS3有哪些新特性？
 
     CSS3实现圆角（border-radius），阴影（box-shadow），
     对文字加特效（text-shadow、），线性渐变（gradient），旋转（transform）
@@ -181,8 +284,8 @@ CSS 相关问题
     在CSS3中唯一引入的伪元素是::selection.
     媒体查询，多栏布局
     border-image
-      
-###XML和JSON的区别？
+
+### XML和JSON的区别？
 
 
     (1).数据体积方面。
@@ -196,11 +299,11 @@ CSS 相关问题
 
 
 
-###对BFC规范的理解？
+### 对BFC规范的理解？
           BFC，块级格式化上下文，一个创建了新的BFC的盒子是独立布局的，盒子里面的子元素的样式不会影响到外面的元素。在同一个BFC中的两个毗邻的块级盒在垂直方向（和布局方向有关系）的margin会发生折叠。
         （W3C CSS 2.1 规范中的一个概念，它决定了元素如何对其内容进行布局，以及与其他元素的关系和相互作用。）
 
-###解释下 CSS sprites，以及你要如何在页面或网站中使用它。
+### 解释下 CSS sprites，以及你要如何在页面或网站中使用它。
 
     CSS Sprites其实就是把网页中一些背景图片整合到一张图片文件中，再利用CSS的“background-image”，“background- repeat”，“background-position”的组合进行背景定位，background-position可以用数字能精确的定位出背景图片的位置。这样可以减少很多图片请求的开销，因为请求耗时比较长；请求虽然可以并发，但是也有限制，一般浏览器都是6个。对于未来而言，就不需要这样做了，因为有了`http2`。
 
@@ -209,14 +312,14 @@ CSS 相关问题
 html部分
 ------
 
-###说说你对语义化的理解？
+### 说说你对语义化的理解？
 
     1，去掉或者丢失样式的时候能够让页面呈现出清晰的结构
     2，有利于SEO：和搜索引擎建立良好沟通，有助于爬虫抓取更多的有效信息：爬虫依赖于标签来确定上下文和各个关键字的权重；
     3，方便其他设备解析（如屏幕阅读器、盲人阅读器、移动设备）以意义的方式来渲染网页；
     4，便于团队开发和维护，语义化更具可读性，是下一步吧网页的重要动向，遵循W3C标准的团队都遵循这个标准，可以减少差异化。
     
-###Doctype作用? 严格模式与混杂模式如何区分？它们有何意义?    
+### Doctype作用? 严格模式与混杂模式如何区分？它们有何意义?    
 
     （1）、<!DOCTYPE> 声明位于文档中的最前面，处于 <html> 标签之前。告知浏览器以何种模式来渲染文档。 
     
@@ -226,7 +329,7 @@ html部分
     
     （4）、DOCTYPE不存在或格式不正确会导致文档以混杂模式呈现。   
 
-###你知道多少种Doctype文档类型？
+### 你知道多少种Doctype文档类型？
 
      该标签可声明三种 DTD 类型，分别表示严格版本、过渡版本以及基于框架的 HTML 文档。
      HTML 4.01 规定了三种文档类型：Strict、Transitional 以及 Frameset。
@@ -300,7 +403,7 @@ HTML与XHTML——二者有什么区别
 
 
     
-###解释下浮动和它的工作原理？清除浮动的技巧
+### 解释下浮动和它的工作原理？清除浮动的技巧
 
     浮动元素脱离文档流，不占据空间。浮动元素碰到包含它的边框或者浮动元素的边框停留。
     
@@ -311,7 +414,7 @@ HTML与XHTML——二者有什么区别
     3.使用after伪对象清除浮动。
        该方法只适用于非IE浏览器。具体写法可参照以下示例。使用中需注意以下几点。一、该方法中必须为需要清除浮动元素的伪对象中设置 height:0，否则该元素会比实际高出若干像素；
 
-###浮动元素引起的问题和解决办法？
+### 浮动元素引起的问题和解决办法？
 
     浮动元素引起的问题：
 
@@ -341,11 +444,11 @@ HTML与XHTML——二者有什么区别
     3,浮动外部元素
     4,设置`overflow`为`hidden`或者auto
 
-###IE 8以下版本的浏览器中的盒模型有什么不同
+### IE 8以下版本的浏览器中的盒模型有什么不同
 
     IE8以下浏览器的盒模型中定义的元素的宽高不包括内边距和边框
 
-###DOM操作——怎样添加、移除、移动、复制、创建和查找节点。 
+### DOM操作——怎样添加、移除、移动、复制、创建和查找节点。 
 
     （1）创建新节点
     
@@ -373,7 +476,7 @@ HTML与XHTML——二者有什么区别
     
           getElementById()    //通过元素Id，唯一性
 
-###html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？
+### html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？
 
     * HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。
     
@@ -431,7 +534,6 @@ iframe的优缺点？
     调用localstorge、cookies等本地存储方式
     
 
-    
 
 线程与进程的区别
 --------
@@ -571,14 +673,14 @@ JavaScript中的作用域与变量声明提升？
 
 其他问题？
 -----
-###你遇到过比较难的技术问题是？你是如何解决的？
+### 你遇到过比较难的技术问题是？你是如何解决的？
 
 
-###列举IE 与其他浏览器不一样的特性？
+### 列举IE 与其他浏览器不一样的特性？
 
 
 
-###什么叫优雅降级和渐进增强？
+### 什么叫优雅降级和渐进增强？
 
     优雅降级：Web站点在所有新式浏览器中都能正常工作，如果用户使用的是老式浏览器，则代码会检查以确认它们是否能正常工作。由于IE独特的盒模型布局问题，针对不同版本的IE的hack实践过优雅降级了,为那些无法支持功能的浏览器增加候选方案，使之在旧式浏览器上以某种形式降级体验却不至于完全失效.
     
@@ -586,7 +688,7 @@ JavaScript中的作用域与变量声明提升？
 
 详见：[css学习归纳总结（一）][6]
 
-###WEB应用从服务器主动推送Data到客户端有那些方式？
+### WEB应用从服务器主动推送Data到客户端有那些方式？
 
 Javascript数据推送
 
@@ -599,7 +701,7 @@ Javascript数据推送
 
 
 
-###对前端界面工程师这个职位是怎么样理解的？它的前景会怎么样？
+### 对前端界面工程师这个职位是怎么样理解的？它的前景会怎么样？
 
     前端是最贴近用户的程序员，比后端、数据库、产品经理、运营、安全都近。
         1、实现界面交互
@@ -704,10 +806,10 @@ javascript继承的6种方法
     5，寄生式继承
     6，寄生组合式继承
 
-详情：[JavaScript继承方式详解][9]
-ajax过程
-------
+> 详情：[JavaScript继承方式详解][9]
 
+ajax过程
+-----
     (1)创建XMLHttpRequest对象,也就是创建一个异步调用对象.
     
     (2)创建一个新的HTTP请求,并指定该HTTP请求的方法、URL及验证信息.
@@ -733,7 +835,7 @@ ajax过程
 
 前端安全问题？
 -------
-###sql注入原理
+### sql注入原理
 
 就是通过把`SQL`命令插入到`Web`表单递交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令。
 
@@ -744,13 +846,13 @@ ajax过程
     3.永远不要使用管理员权限的数据库连接，为每个应用使用单独的权限有限的数据库连接。
     4.不要把机密信息明文存放，请加密或者hash掉密码和敏感的信息。
 
-###XSS原理及防范
+### XSS原理及防范
 
 `Xss(cross-site scripting)`攻击指的是攻击者往Web页面里插入恶意`html`标签或者`javascript`代码。比如：攻击者在论坛中放一个
 看似安全的链接，骗取用户点击后，窃取cookie中的用户私密信息；或者攻击者在论坛中加一个恶意表单，
 当用户提交表单的时候，却把信息传送到攻击者的服务器中，而不是用户原本以为的信任站点。
 
-###XSS防范方法
+### XSS防范方法
 
 1.代码里对用户输入的地方和变量都需要仔细检查长度和对`”<”,”>”,”;”,”’”`等字符做过滤；其次任何内容写到页面之前都必须加以`encode`，避免不小心把`html tag` 弄出来。这一个层面做好，至少可以堵住超过一半的`XSS` 攻击。
 <br/>
@@ -759,7 +861,7 @@ ajax过程
 <br/>
 4.尽量采用POST 而非GET 提交表单
 
-###XSS与CSRF有什么区别吗？
+### XSS与CSRF有什么区别吗？
 
 `XSS`是获取信息，不需要提前知道其他用户页面的代码和数据包。`CSRF`是代替用户完成指定的动作，需要知道其他用户页面的代码和数据包。
 
@@ -768,7 +870,7 @@ ajax过程
 　　1.登录受信任网站A，并在本地生成Cookie。
 　　2.在不登出A的情况下，访问危险网站B。
 
-###CSRF的防御
+### CSRF的防御
 
 1.服务端的CSRF方式方法很多样，但总的思想都是一致的，就是在客户端页面增加伪随机数。
 2.使用验证码
@@ -816,7 +918,7 @@ Flash、Ajax各自的优缺点，在使用中如何取舍？
 这里的同源策略指的是：协议，域名，端口相同，同源策略是一种安全协议。
 指一段脚本只能读取来自同一来源的窗口和文档的属性。
 
-###为什么要有同源限制？
+### 为什么要有同源限制？
    我们举例说明：比如一个黑客程序，他利用`Iframe`把真正的银行登录页面嵌到他的页面上，当你使用真实的用户名，密码登录时，他的页面就可以通过`Javascript`读取到你的表单中`input`中的内容，这样用户名，密码就轻松到手了。
 
 
@@ -881,7 +983,7 @@ GET和POST的区别，何时使用POST？
        
        4、不要在嵌入的JS中调用运行时间较长的函数，如果一定要用，可以用`setTimeout`来调用
 
-###Javascript无阻塞加载具体方式
+### Javascript无阻塞加载具体方式
 
  - **将脚本放在底部。**`<link>`还是放在`head`中，用以保证在`js`加载前，能加载出正常显示的页面。`<script>`标签放在`</body>`前。
  - **成组脚本**：由于每个`<script>`标签下载时阻塞页面解析过程，所以限制页面的`<script>`总数也可以改善性能。适用于内联脚本和外部脚本。
@@ -1115,7 +1217,7 @@ js操作获取和设置cookie
     		cookieText += '; expires=' + expires;
     	}
     	if (path) {
-    		cookieText += '; expires=' + expires;
+    		cookieText += '; path=' + path;
     	}
     	if (domain) {
     		cookieText += '; domain=' + domain;
@@ -1147,14 +1249,14 @@ js操作获取和设置cookie
     }
 
  
-###说说TCP传输的三次握手策略
+### 说说TCP传输的三次握手策略
 
 	为了准确无误地把数据送达目标处，TCP协议采用了三次握手策略。用TCP协议把数据包送出去后，TCP不会对传送  后的情况置之不理，它一定会向对方确认是否成功送达。握手过程中使用了TCP的标志：SYN和ACK。
 	发送端首先发送一个带SYN标志的数据包给对方。接收端收到后，回传一个带有SYN/ACK标志的数据包以示传达确认信息。最后，发送端再回传一个带ACK标志的数据包，代表“握手”结束
 	若在握手过程中某个阶段莫名中断，TCP协议会再次以相同的顺序发送相同的数据包。
 
 
-###说说你对Promise的理解
+### 说说你对Promise的理解
 
 依照 `Promise/A+` 的定义，`Promise` 有四种状态：
 
@@ -1188,27 +1290,27 @@ js操作获取和设置cookie
 
 ##Javascript垃圾回收方法
 
-###标记清除（mark and sweep）
+### 标记清除（mark and sweep）
 
 
 这是`JavaScript`最常见的垃圾回收方式，当变量进入执行环境的时候，比如函数中声明一个变量，垃圾回收器将其标记为“进入环境”，当变量离开环境的时候（函数执行结束）将其标记为“离开环境”。
 
 垃圾回收器会在运行的时候给存储在内存中的所有变量加上标记，然后去掉环境中的变量以及被环境中变量所引用的变量（闭包），在这些完成之后仍存在标记的就是要删除的变量了
 
-###引用计数(reference counting)
+### 引用计数(reference counting)
 
 在低版本`IE`中经常会出现内存泄露，很多时候就是因为其采用引用计数方式进行垃圾回收。引用计数的策略是跟踪记录每个值被使用的次数，当声明了一个 变量并将一个引用类型赋值给该变量的时候这个值的引用次数就加1，如果该变量的值变成了另外一个，则这个值得引用次数减1，当这个值的引用次数变为0的时 候，说明没有变量在使用，这个值没法被访问了，因此可以将其占用的空间回收，这样垃圾回收器会在运行的时候清理掉引用次数为0的值占用的空间。
 
 在IE中虽然`JavaScript`对象通过标记清除的方式进行垃圾回收，但BOM与DOM对象却是通过引用计数回收垃圾的，也就是说只要涉及BOM及DOM就会出现循环引用问题。
 
-###谈谈性能优化问题
+### 谈谈性能优化问题
 
 代码层面：避免使用css表达式，避免使用高级选择器，通配选择器。
 缓存利用：缓存Ajax，使用CDN，使用外部js和css文件以便缓存，添加Expires头，服务端配置Etag，减少DNS查找等
 请求数量：合并样式和脚本，使用css图片精灵，初始首屏之外的图片资源按需加载，静态资源延迟加载。
 请求带宽：压缩文件，开启GZIP，
 
-###移动端性能优化
+### 移动端性能优化
 
 >尽量使用`css3`动画，开启硬件加速。适当使用`touch`事件代替`click`事件。避免使用`css3`渐变阴影效果。
 >尽可能少的使用`box-shadow`与`gradients`。`box-shadow`与`gradients`往往都是页面的性能杀手
@@ -1221,7 +1323,7 @@ js操作获取和设置cookie
 
 那么服务器是根据什么判断缓存是否还有效呢?答案有两种方式，一种是前面提到的ETag，另一种是根据`Last-Modified`
 
-###Expires和Cache-Control
+### Expires和Cache-Control
 
 `Expires`要求客户端和服务端的时钟严格同步。HTTP1.1引入`Cache-Control`来克服Expires头的限制。如果max-age和Expires同时出现，则max-age有更高的优先级。
 
@@ -1231,26 +1333,36 @@ js操作获取和设置cookie
     Pragma: private
     Last-Modified: $now // RFC1123 format
 
-###栈和队列的区别?
+### 栈和队列的区别?
 
     栈的插入和删除操作都是在一端进行的，而队列的操作却是在两端进行的。
     队列先进先出，栈先进后出。
     栈只允许在表尾一端进行插入和删除，而队列只允许在表尾一端进行插入，在表头一端进行删除 
 
-###栈和堆的区别？
+### 栈和堆的区别？
 
     栈区（stack）—   由编译器自动分配释放   ，存放函数的参数值，局部变量的值等。
     堆区（heap）   —   一般由程序员分配释放，   若程序员不释放，程序结束时可能由OS回收。
     堆（数据结构）：堆可以被看成是一棵树，如：堆排序；
     栈（数据结构）：一种先进后出的数据结构。 
 
-###关于Http 2.0 你知道多少？
+### 关于Http 2.0 你知道多少？
 
 `HTTP/2`引入了“服务端推（serverpush）”的概念，它允许服务端在客户端需要数据之前就主动地将数据发送到客户端缓存中，从而提高性能。
 `HTTP/2`提供更多的加密支持
 `HTTP/2`使用多路技术，允许多个消息在一个连接上同时交差。 
 它增加了头压缩（header compression），因此即使非常小的请求，其请求和响应的`header`都只会占用很小比例的带宽。
-  
+
+### Cookie被禁用了？Session还能用吗？为什么？
+不一定。如果`session id`保存在cookie中，则禁用cookie后session将无法正常使用。
+
+原因如下：当程序需要为某个客户端的请求创建一个session时，服务器首先检查这个客户端的请求里是否已包含了一个session标识（称为`session id`），如果已包含则说明以前已经为此客户端创建过session，服务器就按照`session id`把这个session检索出来使用（检索不到，会新建一个），如果客户端请求不包含`session id`，则为此客户端创建一个session并且生成一个与此session相关联的`session id`，
+>`session id`的值应该是一个既不会重复，又不容易被找到规律以仿造的字符串，这个`session id`将被在本次响应中返回给客户端保存。
+
+**保存这个`session id`最常见的方法就是直接放在cookie中**，这样在交互过程中浏览器可以自动的按照规则把这个标识发送给服务器。但是，一旦浏览器禁用了cookie，session同时也会无法使用。解决方法有两种：
+1. 使用URL重写，将`session id`附在URL中
+2. 使用隐藏表单字段,将`session id`放在隐藏的表单字段中一同提交
+
   [1]: /img/bVldFY
   [2]: http://segmentfault.com/blog/trigkit4/1190000000718840
   [3]: http://segmentfault.com/blog/trigkit4/1190000000660786#articleHeader15
